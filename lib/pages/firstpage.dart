@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:simple_shadow/simple_shadow.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -17,7 +16,8 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   void initState() {
-    assetsAudioPlayer.open(Audio("assets/sounds/pamungkas.mp3"));
+    assetsAudioPlayer.open(Audio("assets/sounds/pamungkas.mp3"),
+        autoStart: false);
 
     assetsAudioPlayer.isPlaying.listen((event) {
       if (mounted) {
@@ -42,7 +42,14 @@ class _FirstPageState extends State<FirstPage> {
         });
       }
     });
+
     super.initState();
+  }
+
+  @override
+  Future<void> dispose() async {
+    await assetsAudioPlayer.stop();
+    super.dispose();
   }
 
   Widget slider() {
@@ -110,21 +117,23 @@ class _FirstPageState extends State<FirstPage> {
                           SizedBox(
                             height: 50,
                           ),
-                          SimpleShadow(
-                            opacity: 0.6, // Default: 0.5
-                            color: Colors.black, // Default: Black
-                            offset: Offset(10, 10), // Default: Offset(2, 2)
-                            sigma: 7, // Default: 2
-                            child: Container(
-                              height: 250,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage("assets/images/cover.jpg"),
-                                  fit: BoxFit.cover,
-                                ),
+                          Container(
+                            height: 250,
+                            width: 250,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/cover.jpg"),
+                                fit: BoxFit.cover,
                               ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.5),
+                                  blurRadius: 1,
+                                  spreadRadius: 1,
+                                  offset: Offset(10, 10), // Shadow position
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(
