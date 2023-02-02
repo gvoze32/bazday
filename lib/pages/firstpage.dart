@@ -1,19 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:dotted_line/dotted_line.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
-final Uri _url = Uri.parse(
-    'https://open.spotify.com/playlist/2xz1ALiYDO4IdDidETzgNZ?si=289e01a2db5a4f9b&nd=1');
-
-Future<void> _launchUrl() async {
-  if (!await launchUrl(_url)) {
-    throw Exception('Could not launch $_url');
-  }
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => _FirstPageState();
 }
 
-class FirstPage extends StatelessWidget {
+class _FirstPageState extends State<FirstPage> {
+  final assetsAudioPlayer = AssetsAudioPlayer();
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+  bool isPlaying = true;
+
+  @override
+  void initState() {
+    assetsAudioPlayer.open(Audio("assets/sounds/pamungkas.mp3"));
+
+    assetsAudioPlayer.isPlaying.listen((event) {
+      if (mounted) {
+        setState(() {
+          isPlaying = event;
+        });
+      }
+    });
+
+    assetsAudioPlayer.onReadyToPlay.listen((newDuration) {
+      if (mounted) {
+        setState(() {
+          duration = newDuration?.duration ?? Duration.zero;
+        });
+      }
+    });
+
+    assetsAudioPlayer.currentPosition.listen((newPosition) {
+      if (mounted) {
+        setState(() {
+          position = newPosition;
+        });
+      }
+    });
+    super.initState();
+  }
+
+  Widget slider() {
+    return Container(
+      width: 270,
+      child: Slider.adaptive(
+          activeColor: Colors.white,
+          inactiveColor: Colors.grey[350],
+          value: position.inSeconds.toDouble(),
+          max: duration.inSeconds.toDouble(),
+          onChanged: (value) async {
+            await assetsAudioPlayer.seek(Duration(seconds: value.toInt()));
+          }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,41 +108,105 @@ class FirstPage extends StatelessWidget {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 15,
+                            height: 50,
                           ),
-                          Column(
+                          SimpleShadow(
+                            opacity: 0.6, // Default: 0.5
+                            color: Colors.black, // Default: Black
+                            offset: Offset(10, 10), // Default: Offset(2, 2)
+                            sigma: 7, // Default: 2
+                            child: Container(
+                              height: 250,
+                              width: 250,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/cover.jpg"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 70,
+                          ),
+                          Row(
                             children: [
                               Text(
-                                "Gallery",
+                                "Happy Birthday To You",
                                 style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                             ],
                           ),
-                          Column(
+                          Row(
                             children: [
                               Text(
-                                "Birthday Celebration",
+                                "Pamungkas",
                                 style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 10,
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: 45,
+                            height: 10,
+                          ),
+                          Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                slider(),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Column(),
+                              IconButton(
+                                iconSize: 40.0,
+                                color: Colors.white,
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.skip_previous,
+                                ),
+                              ),
+                              IconButton(
+                                iconSize: 55.0,
+                                color: Colors.white,
+                                onPressed: () async {
+                                  await assetsAudioPlayer.playOrPause();
+                                },
+                                icon: isPlaying
+                                    ? const Icon(
+                                        Icons.pause_circle,
+                                        color: Colors.white,
+                                      )
+                                    : const Icon(
+                                        Icons.play_circle,
+                                        color: Colors.white,
+                                      ),
+                              ),
+                              IconButton(
+                                iconSize: 40.0,
+                                color: Colors.white,
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.skip_next,
+                                ),
+                              ),
                             ],
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -112,7 +221,7 @@ class FirstPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: Center(
                     child: Text(
-                      "PLAY",
+                      "NEXT",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: HexColor("#BD6EC3"),
@@ -120,46 +229,6 @@ class FirstPage extends StatelessWidget {
                     ),
                   ),
                 )
-              ],
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 640,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 25.8,
-                  backgroundColor: Colors.white,
-                ),
-                CircleAvatar(
-                  radius: 25.8,
-                  backgroundColor: Colors.white,
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 560,
-            bottom: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 25.8,
-                  backgroundColor: Colors.white,
-                ),
-                CircleAvatar(
-                  radius: 25.8,
-                  backgroundColor: Colors.white,
-                ),
               ],
             ),
           ),

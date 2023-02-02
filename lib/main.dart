@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:bazday/pages/homepage.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +13,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage()
-    );
+    return GetMaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
   }
 }

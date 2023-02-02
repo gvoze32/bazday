@@ -1,5 +1,6 @@
 import 'package:bazday/pages/firstpage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -15,6 +16,7 @@ Future<void> _launchUrl() async {
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -344,10 +346,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => FirstPage()),
-                      );
+                      Get.to(FirstPage());
                     }),
               ],
             ),
