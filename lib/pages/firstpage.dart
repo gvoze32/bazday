@@ -54,7 +54,7 @@ class _FirstPageState extends State<FirstPage> {
 
   Widget slider() {
     return Container(
-      width: 270,
+      width: 250,
       child: Slider.adaptive(
           activeColor: Colors.white,
           inactiveColor: Colors.grey[350],
@@ -110,113 +110,112 @@ class _FirstPageState extends State<FirstPage> {
                         color: HexColor("#51396D"),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 50,
+                      child: Container(
+                        height: 500,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/cover.gif"),
+                            fit: BoxFit.cover,
                           ),
-                          Container(
-                            height: 250,
-                            width: 250,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: AssetImage("assets/images/cover.jpg"),
-                                fit: BoxFit.cover,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.5),
-                                  blurRadius: 1,
-                                  spreadRadius: 1,
-                                  offset: Offset(10, 10), // Shadow position
-                                ),
-                              ],
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              blurRadius: 1,
+                              spreadRadius: 1,
+                              offset: Offset(6, 5), // Shadow position
                             ),
-                          ),
-                          SizedBox(
-                            height: 70,
-                          ),
-                          Row(
+                          ],
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 16),
+                          child: Column(
                             children: [
-                              Text(
-                                "Happy Birthday To You",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 14,
+                              SizedBox(
+                                height: 375,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Happy Birthday To You",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Pamungkas",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    slider(),
+                                  ],
                                 ),
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    iconSize: 40.0,
+                                    color: Colors.white,
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.skip_previous,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    iconSize: 55.0,
+                                    color: Colors.white,
+                                    onPressed: () async {
+                                      await assetsAudioPlayer.playOrPause();
+                                    },
+                                    icon: isPlaying
+                                        ? const Icon(
+                                            Icons.pause_circle,
+                                            color: Colors.white,
+                                          )
+                                        : const Icon(
+                                            Icons.play_circle,
+                                            color: Colors.white,
+                                          ),
+                                  ),
+                                  IconButton(
+                                    iconSize: 40.0,
+                                    color: Colors.white,
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.skip_next,
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                "Pamungkas",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                slider(),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                iconSize: 40.0,
-                                color: Colors.white,
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.skip_previous,
-                                ),
-                              ),
-                              IconButton(
-                                iconSize: 55.0,
-                                color: Colors.white,
-                                onPressed: () async {
-                                  await assetsAudioPlayer.playOrPause();
-                                },
-                                icon: isPlaying
-                                    ? const Icon(
-                                        Icons.pause_circle,
-                                        color: Colors.white,
-                                      )
-                                    : const Icon(
-                                        Icons.play_circle,
-                                        color: Colors.white,
-                                      ),
-                              ),
-                              IconButton(
-                                iconSize: 40.0,
-                                color: Colors.white,
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.skip_next,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -237,7 +236,7 @@ class _FirstPageState extends State<FirstPage> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
