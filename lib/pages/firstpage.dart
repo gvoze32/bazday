@@ -225,14 +225,24 @@ class _FirstPageState extends State<FirstPage> {
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 1,
+                        spreadRadius: 1,
+                        offset: Offset(3, 4), // Shadow position
+                      ),
+                    ],
                   ),
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: Center(
-                    child: Text(
-                      "NEXT",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: HexColor("#BD6EC3"),
+                    child: Container(
+                      child: Text(
+                        "NEXT",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: HexColor("#BD6EC3"),
+                        ),
                       ),
                     ),
                   ),

@@ -16,7 +16,7 @@ Future<void> _launchUrl() async {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -333,6 +333,14 @@ class HomePage extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            offset: Offset(3, 4), // Shadow position
+                          ),
+                        ],
                       ),
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: Center(
