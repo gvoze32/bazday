@@ -16,6 +16,7 @@ class SecondPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
+      body: SingleChildScrollView(),
     );
   }
 }

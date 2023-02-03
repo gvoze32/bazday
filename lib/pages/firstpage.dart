@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:get/get.dart';
+import 'package:bazday/pages/secondpage.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -220,33 +222,37 @@ class _FirstPageState extends State<FirstPage> {
                     ),
                   ),
                 ),
-                Container(
-                  width: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        blurRadius: 1,
-                        spreadRadius: 1,
-                        offset: Offset(3, 4), // Shadow position
-                      ),
-                    ],
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  child: Center(
+                InkWell(
                     child: Container(
-                      child: Text(
-                        "NEXT",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: HexColor("#BD6EC3"),
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            offset: Offset(3, 4), // Shadow position
+                          ),
+                        ],
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: Center(
+                        child: Container(
+                          child: Text(
+                            "NEXT",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: HexColor("#BD6EC3"),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
+                    onTap: () {
+                      Get.to(SecondPage());
+                    }),
               ],
             ),
           ),
