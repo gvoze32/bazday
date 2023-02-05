@@ -11,19 +11,32 @@ class SecondPage extends StatefulWidget {
   _SecondPageState createState() => _SecondPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _SecondPageState extends State<SecondPage> with WidgetsBindingObserver {
   final assetsAudioPlayer = AssetsAudioPlayer();
+
+  late AppLifecycleState appLifecycle;
+
+  didChangeAppLifecycleState(AppLifecycleState state) async {
+    appLifecycle = state;
+    setState(() {});
+
+    if (state == AppLifecycleState.paused) {
+      await assetsAudioPlayer.stop();
+    }
+  }
 
   @override
   void initState() {
     assetsAudioPlayer.open(Audio("assets/sounds/boypablo.mp3"),
         autoStart: true);
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   Future<void> dispose() async {
     await assetsAudioPlayer.stop();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

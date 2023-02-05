@@ -7,7 +7,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final Uri _url = Uri.parse(
-    'https://open.spotify.com/playlist/2xz1ALiYDO4IdDidETzgNZ?si=289e01a2db5a4f9b&nd=1');
+    'https://open.spotify.com/playlist/6OApgL3FmaueHD6CqVKhMW?si=2cfa50fe6d6d45d1&nd=1');
 
 Future<void> _launchUrl() async {
   if (!await launchUrl(_url)) {

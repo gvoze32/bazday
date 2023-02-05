@@ -44,7 +44,6 @@ dependencies:
   get: ^4.6.5
   assets_audio_player: ^3.0.6
   flutter_flip_card: ^0.0.4
-  confetti: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -60,7 +59,7 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 flutter_native_splash:
-  color: "#8E48CD"
+  color: "#FFFFFF"
   android: true
   ios: true
   web: true

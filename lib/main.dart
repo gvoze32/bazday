@@ -4,8 +4,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:bazday/pages/homepage.dart';
 import 'package:get/get.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await Future.delayed(Duration(seconds: 3));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

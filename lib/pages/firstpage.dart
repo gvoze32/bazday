@@ -10,11 +10,22 @@ class FirstPage extends StatefulWidget {
   _FirstPageState createState() => _FirstPageState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _FirstPageState extends State<FirstPage> with WidgetsBindingObserver {
   final assetsAudioPlayer = AssetsAudioPlayer();
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
   bool isPlaying = true;
+
+  late AppLifecycleState appLifecycle;
+
+  didChangeAppLifecycleState(AppLifecycleState state) async {
+    appLifecycle = state;
+    setState(() {});
+
+    if (state == AppLifecycleState.paused) {
+      await assetsAudioPlayer.stop();
+    }
+  }
 
   @override
   void initState() {
@@ -46,11 +57,13 @@ class _FirstPageState extends State<FirstPage> {
     });
 
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   Future<void> dispose() async {
     await assetsAudioPlayer.stop();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
