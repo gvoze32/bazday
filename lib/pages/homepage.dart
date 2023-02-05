@@ -7,7 +7,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final Uri _url = Uri.parse(
-    'https://open.spotify.com/playlist/6OApgL3FmaueHD6CqVKhMW?si=2cfa50fe6d6d45d1&nd=1');
+    'https://www.google.co.id/maps/place/SMP+Muhammadiyah+1+Yogyakarta/@-7.7997331,110.3558038,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a578ba226a59f:0x928442cfeac9e7b9!8m2!3d-7.7997384!4d110.3579925!16s%2Fg%2F1220459t');
 
 Future<void> _launchUrl() async {
   if (!await launchUrl(_url)) {
@@ -354,7 +354,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Get.to(FirstPage());
+                      Get.offAll(FirstPage());
                     }),
               ],
             ),

@@ -35,9 +35,9 @@ class _SecondPageState extends State<SecondPage> with WidgetsBindingObserver {
 
   @override
   Future<void> dispose() async {
+    super.dispose();
     await assetsAudioPlayer.stop();
     WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 
   Widget build(BuildContext context) {

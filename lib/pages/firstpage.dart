@@ -62,9 +62,9 @@ class _FirstPageState extends State<FirstPage> with WidgetsBindingObserver {
 
   @override
   Future<void> dispose() async {
+    super.dispose();
     await assetsAudioPlayer.stop();
     WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 
   Widget slider() {
@@ -264,7 +264,7 @@ class _FirstPageState extends State<FirstPage> with WidgetsBindingObserver {
                       ),
                     ),
                     onTap: () {
-                      Get.to(SecondPage());
+                      Get.offAll(SecondPage());
                     }),
               ],
             ),
