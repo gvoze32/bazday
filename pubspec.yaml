@@ -44,6 +44,7 @@ dependencies:
   get: ^4.6.5
   assets_audio_player: ^3.0.6
   flutter_flip_card: ^0.0.4
+  double_back_to_close_app: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -63,8 +64,7 @@ flutter_native_splash:
   android: true
   ios: true
   web: true
-  android_12:
-    image: assets/images/splashbg.png
+  image: assets/images/splashbg.png
 
 # The following section is specific to Flutter packages.
 flutter:
